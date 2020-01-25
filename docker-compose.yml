@@ -20,5 +20,17 @@ services:
     networks:
       - tt
 
+  app:
+    build: app
+    networks:
+      - tt
+    restart: on-failure
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+    environment:
+      SQLALCHEMY_DATABASE_URI:   "postgresql://postgres:passw0rd@1@tt-db:5432/postgres"
+
 networks:
   tt:
